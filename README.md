@@ -15,3 +15,21 @@ fn clipped_add(a: u8, b: u8) -> u8 {
     a + b
 }
 ```
+
+To run the tests:
+
+```bash
+cargo test 
+```
+
+To take a look at the test code after macro expansion, you can install `cargo-expand` (needs a nightly compiler):
+
+```bash
+cargo install cargo-expand
+```
+
+And emit the expanded test code:
+
+```bash
+cargo expand --test precond
+```
