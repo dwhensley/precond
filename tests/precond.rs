@@ -68,3 +68,27 @@ fn test_generics_with_where_clause() {
 
     assert_eq!(8usize, f(2usize, "string"));
 }
+
+#[test]
+fn test_std_lib_fns() {
+    #[precond(|a, b| (std::cmp::min(a, 100), std::cmp::min(b, 100)))]
+    fn f(a: u8, b: u8) -> u8 {
+        a + b
+    }
+
+    assert_eq!(101, f(255, 1));
+}
+
+#[test]
+fn test_fn_pointer_in_closure() {
+    fn f(a: u8, b: u8) -> (u8, u8) {
+        (b, a)
+    }
+
+    #[precond(|a, b| f(a, b))]
+    fn g(a: u8, b: u8) -> u8 {
+        a
+    }
+
+    assert_eq!(2, g(1, 2));
+}
